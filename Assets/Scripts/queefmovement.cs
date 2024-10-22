@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class uwu : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D player;
