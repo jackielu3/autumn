@@ -5,7 +5,19 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float speed = 5.0f;
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] public float groundDistance = 0.5f;
+    [SerializeField] private Rigidbody rigidBody;
+
+    void Awake()
+    {
+        rigidBody = GetComponent<Rigidbody>();
+    }
+
+    bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, groundDistance);
+    }
 
     // Update is called once per frame
     void Update()
@@ -14,5 +26,9 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         Vector3 move = new Vector3(horizontal * speed, 0f, vertical * speed) * Time.deltaTime;
         transform.position += move;
+        if (Input.GetKeyDown("space") && IsGrounded())
+        {
+            rigidBody.velocity = Vector3.up * jumpForce;
+        }
     }
 }
