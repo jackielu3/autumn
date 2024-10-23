@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Rigidbody rigidBody;
+    private float currentSpeed;
+
+    [Header("Grounded")]
     private float speed = 5.0f;
+
+    [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] public float groundDistance = 0.5f;
-    [SerializeField] private Rigidbody rigidBody;
+
+    [Header("Animations")]
+    [SerializeField] private Animator animator;
 
     void Awake()
     {
@@ -22,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentSpeed = new Vector3(rigidBody.velocity.x, 0, rigidBody.velocity.z).magnitude;
+        animator.SetFloat("Speed", currentSpeed);
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 move = new Vector3(horizontal * speed, 0f, vertical * speed) * Time.deltaTime;
