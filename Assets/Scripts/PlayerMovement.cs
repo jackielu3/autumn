@@ -26,6 +26,19 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         Vector3 move = new Vector3(horizontal * speed, 0f, vertical * speed) * Time.deltaTime;
         transform.position += move;
+        if (Input.GetAxis("Mouse X") < 0)
+        {
+            //Code for action on mouse moving left
+            print("Mouse moved left");
+        }
+        if (Input.GetAxis("Mouse X") > 0)
+        {
+            //Code for action on mouse moving right
+            print("Mouse moved right");
+        }
+
+
+
         if (Input.GetKeyDown("space") && IsGrounded())
         {
             rigidBody.velocity = Vector3.up * jumpForce;
