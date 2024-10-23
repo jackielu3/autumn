@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Moss Testing.unity
+    guid: fed78edf38be26741a30c8d9768668d7
   m_configObjects: {}

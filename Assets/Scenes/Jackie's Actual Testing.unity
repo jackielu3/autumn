@@ -800,7 +800,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29aa0f2120e4e64babefae69e9f077e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 942809120}
+  rigidBody: {fileID: 0}
+  currentSpeed: 0
+  isGrounded: 0
+  speed: 5
+  jumpForce: 5
+  groundDistance: 0.5
+  animator: {fileID: 0}
 --- !u!54 &942809120
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -840,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1158db88584ecb4c8eb38a765766fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAlive: 1
+  playerAlive: 0
   onPlayerHealthChanged: {fileID: 11400000, guid: 41b69896f6f4ac24faf60e6b7e0fec57, type: 2}
   onPlayerMaxHealthChanged: {fileID: 11400000, guid: 5b80cd717ac52464fb11834e90d02697, type: 2}
   onPlayerDeath: {fileID: 11400000, guid: b16426244bc1f1c42a195761487ab206, type: 2}
