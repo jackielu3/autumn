@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : PlayerBaseAttack
+public class Gun : MonoBehaviour
 {
-    [SerializeField] Transform gunTipl;
-
-    public Gun() : base("Gun", 1.0f, 50.0f) { }
-
-    public void ExecuteAttack()
+    [SerializeField] Transform gunTip;
+    [SerializeField] GameObject bullet;
+    
+    private void Shoot()
     {
-        
+        Instantiate(bullet, gunTip, );
     }
 
 }
