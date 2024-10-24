@@ -16,23 +16,23 @@ public class PlayerHit : MonoBehaviour
 
 
     [Header("Health")]
-    [SerializeField] private int playerMaxHP;
-    [SerializeField] private int playerHP;
+    [SerializeField] private float MaxHp;
+    [SerializeField] private float Hp;
 
 
     // Start is called before the first frame update
     void Start()
     {
         playerAlive = true;
-        SetMaxHealth(playerMaxHP);
-        SetHealth(playerHP);
+        SetMaxHealth(MaxHp);
+        SetHealth(Hp);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Game Over HP 0
-        if (playerHP <= 0 && playerAlive)
+        if (Hp <= 0 && playerAlive)
         {
             PlayerDeath();
         }
@@ -48,38 +48,38 @@ public class PlayerHit : MonoBehaviour
 
         if (source.tag == "Enemy")
         {
-            int damageTaken = (int)source.GetComponent<EnemyAttack>().getBodyDamage();
+            float damageTaken = source.GetComponent<EnemyAttack>().getBodyDamage();
             Hit(damageTaken);
             onPlayerTakesDamage.Raise(source.GetComponent<EnemyAttack>(), damageTaken);
         }
     }
 
     // Calculates the damage
-    private void Hit(int damage)
+    private void Hit(float damage)
     {
-        if (playerHP - damage > 0)
+        if (Hp - damage > 0)
         {
-            playerHP -= damage;
+            Hp -= damage;
         }
         else
         {
-            playerHP = 0;
+            Hp = 0;
         }
 
-        SetHealth(playerHP);
+        SetHealth(Hp);
     }
 
     // Sets the HP of the player
-    public void SetHealth(int health)
+    public void SetHealth(float health)
     {
-        playerHP = health;
+        Hp = health;
         onPlayerHealthChanged.Raise(this, health);
     }
 
     // Sets the Max HP of the player
-    public void SetMaxHealth(int health)
+    public void SetMaxHealth(float health)
     {
-        playerMaxHP = health;
+        MaxHp = health;
         onPlayerMaxHealthChanged.Raise(this, health);
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
 
-    [SerializeField] private float bodyDamage;
+    [SerializeField] private int bodyDamage;
 
 
     public float getBodyDamage()
