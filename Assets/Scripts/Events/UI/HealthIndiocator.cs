@@ -12,33 +12,33 @@ public class HealthIndicator : MonoBehaviour
     {
         // Temp values, gets set in PlayerHit
         slider.minValue = 0;
-        slider.maxValue = 10;
+        slider.maxValue = 100;
     }
 
-    private void SetMaxHealth(int health)
+    private void SetMaxHealth(float health)
     {
         slider.maxValue = health;
     }
 
-    private void SetHealth(int health)
+    private void SetHealth(float health)
     {
         slider.value = health;
     }
 
     public void UpdateHealth(Component sender, object data)
     {
-        if (data is int)
+        if (data is float)
         {
-            int amount = (int)data;
+            float amount = (float)data;
             SetHealth(amount);
         }
     }
 
     public void UpdateMaxHealth(Component sender, object data)
     {
-        if (data is int)
+        if (data is float)
         {
-            int amount = (int)data;
+            float amount = (float)data;
             SetMaxHealth(amount);
 
         }

@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class Acorn : MonoBehaviour, IDamageable
 {
-    public float damage;
+    [SerializeField] private BulletData bulletData;
+
+    private void Start()
+    {
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,10 +25,8 @@ public class Acorn : MonoBehaviour, IDamageable
     {
         Destroy(gameObject);
     }
-
     public float GetDamage()
     {
-        return damage;
+        return bulletData.damage;
     }
-
 }

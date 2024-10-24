@@ -6,12 +6,16 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] Transform gunTip;
-    [SerializeField] GameObject bullet;
+    [SerializeField] private Transform gunTip;
 
-    [Header("Gun Logic")]
-    [SerializeField] float bulletForce = 25f;
+    [Header("Bullet Types")]
+    [SerializeField] List<BulletData> bulletTypes;
+    [SerializeField][ReadOnly] BulletData selectedBullet;
 
+    private void Start()
+    {
+        selectedBullet = bulletTypes[0];
+    }
 
     private void Update()
     {
@@ -23,12 +27,12 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject b = Instantiate(bullet, gunTip.position, gunTip.rotation);
+        GameObject bullet = Instantiate(selectedBullet.model, gunTip.position, gunTip.rotation);
 
-        Rigidbody rb = b.GetComponent<Rigidbody>();
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.velocity = gunTip.forward * bulletForce;
+            rb.velocity = gunTip.forward * selectedBullet.bulletForce;
         }
     }
 

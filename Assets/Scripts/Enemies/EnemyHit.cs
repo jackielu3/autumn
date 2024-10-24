@@ -16,9 +16,19 @@ public class EnemyHit : MonoBehaviour
 
         if (damageSource != null)
         {
-            damageSource.GetDamage();
+            Hp -= damageSource.GetDamage();
+
+            if (Hp <= 0)
+            {
+                Death();
+            }
 
             Debug.Log($"{gameObject.name} dammage taken: {damageSource.GetDamage()}, Current HP: {MaxHP}/{Hp}");
         }
+    }
+
+    private void Death()
+    {
+        Destroy(gameObject);
     }
 }

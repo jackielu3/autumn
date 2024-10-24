@@ -44,7 +44,7 @@ public class PlayerHit : MonoBehaviour
         // Debug.Log(col.gameObject.tag);
         GameObject source = col.gameObject;
 
-        Debug.Log(col);
+        // Debug.Log(col);
 
         if (source.tag == "Enemy")
         {
