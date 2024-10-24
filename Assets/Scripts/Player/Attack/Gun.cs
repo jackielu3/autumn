@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
     
     private void Shoot()
     {
-        Instantiate(bullet, gunTip, );
+    //    Instantiate(bullet, gunTip, );
     }
 
 }
