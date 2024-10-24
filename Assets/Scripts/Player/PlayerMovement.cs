@@ -76,6 +76,9 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        var targetAngle = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg;
+
+
         currentSpeed = new Vector3(horizontal, 0, vertical).magnitude * speed;
 
         // Get the camera's forward and right vectors, ignoring any vertical direction
@@ -91,13 +94,13 @@ public class PlayerMovement : MonoBehaviour
         // Apply movement
         if (move != Vector3.zero)
         {
-            model.transform.forward = new Vector3(move.x, 0, move.z).normalized;
+            model.transform.forward = move.normalized;
             transform.position += move;
         }
     }
 
 
-
+ 
     void OnLand()
     {
         // Used for Animator, will hopefully implement special conditions for landing later
