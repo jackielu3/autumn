@@ -8,9 +8,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField][ReadOnly] private float currentSpeed;
 
+    [Header("General")]
+    [SerializeField][ReadOnly] private Vector3 move;
+
     [Header("Grounded")]
     [SerializeField] private bool isGrounded;
-    [SerializeField] private float speed = 5.0f;
+    [SerializeField] private float speed = 3.5f;
+    [SerializeField] private float dashDistance = 5.0f;
+    [SerializeField] private bool isSprinting;
+
 
 
     [Header("Jump")]
@@ -35,8 +41,33 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GetMove();
         isGrounded = IsGrounded();
-        Walking();
+        
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isSprinting = true;
+            speed = 6.0f;
+            Sprinting();
+ 
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            isDashing();
+        }
+        else
+        {
+            isSprinting = false;
+            speed = 3.5f;
+            Walking();
+        }
+
+        
+
+
+
+
         animator.SetFloat("Speed", currentSpeed);
         
         animator.SetBool("Grounded", isGrounded);
@@ -73,6 +104,38 @@ public class PlayerMovement : MonoBehaviour
 
     void Walking()
     {
+       
+
+        // Apply movement
+        if (move != Vector3.zero)
+        {
+            model.transform.forward = move.normalized;
+            transform.position += move;
+        }
+    }
+
+    void Sprinting()
+    {
+
+
+        
+
+        // Apply movement
+        if (move != Vector3.zero)
+        {
+            model.transform.forward = move.normalized;
+            transform.position += move;
+        }
+    }
+
+    void OnLand()
+    {
+        // Used for Animator, will hopefully implement special conditions for landing later
+    }
+
+
+    Vector3 GetMove() 
+    {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
@@ -86,23 +149,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 cameraRight = Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)).normalized;
 
         // Calculate the movement direction based on input and camera's orientation
-        Vector3 move = (cameraForward * vertical + cameraRight * horizontal).normalized * speed * Time.deltaTime;
-
-        // Log to check the values of cameraForward, cameraRight, and move
-        Debug.Log($"CameraForward: {cameraForward}, CameraRight: {cameraRight}, Move: {move}");
-
-        // Apply movement
-        if (move != Vector3.zero)
-        {
-            model.transform.forward = move.normalized;
-            transform.position += move;
-        }
+        move = (cameraForward * vertical + cameraRight * horizontal).normalized * speed * Time.deltaTime;
+        return move;
     }
 
-
- 
-    void OnLand()
+    // Temporary Dash function, to be removed upon completion of the smoother dash
+    void isDashing()
     {
-        // Used for Animator, will hopefully implement special conditions for landing later
+     
+        transform.position += GetMove().normalized * dashDistance;
     }
 }
