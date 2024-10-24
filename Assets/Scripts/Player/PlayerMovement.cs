@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = (cameraForward * vertical + cameraRight * horizontal).normalized * speed * Time.deltaTime;
 
         // Log to check the values of cameraForward, cameraRight, and move
-        Debug.Log($"CameraForward: {cameraForward}, CameraRight: {cameraRight}, Move: {move}");
+        // Debug.Log($"CameraForward: {cameraForward}, CameraRight: {cameraRight}, Move: {move}");
 
         // Apply movement
         if (move != Vector3.zero)
