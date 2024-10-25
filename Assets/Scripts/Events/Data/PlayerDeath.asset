@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ea54684638b0e41b097275b64186ca, type: 3}
   m_Name: PlayerDeath
   m_EditorClassIdentifier: 
-  listeners:
-  - {fileID: 0}
+  listeners: []
