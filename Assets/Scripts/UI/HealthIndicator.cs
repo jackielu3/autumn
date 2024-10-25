@@ -29,8 +29,8 @@ public class HealthIndicator : MonoBehaviour
     {
         if (data is float)
         {
-            float amount = (float)data;
-            SetHealth(amount);
+            float value = (float)data;
+            SetHealth(value);
         }
     }
 
@@ -38,8 +38,8 @@ public class HealthIndicator : MonoBehaviour
     {
         if (data is float)
         {
-            float amount = (float)data;
-            SetMaxHealth(amount);
+            float value = (float)data;
+            SetMaxHealth(value);
 
         }
     }
