@@ -132,14 +132,16 @@ public class PlayerMovement : MonoBehaviour
         var targetAngle = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg;
 
 
-        currentSpeed = new Vector3(horizontal, 0, vertical).magnitude * speed;
+        currentSpeed = new Vector3(horizontal, 0, vertical).normalized.magnitude * speed;
+        
 
         // Get the camera's forward and right vectors, ignoring any vertical direction
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 cameraRight = Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)).normalized;
 
         // Calculate the movement direction based on input and camera's orientation
-        move = (cameraForward * vertical + cameraRight * horizontal).normalized * speed * Time.deltaTime;
+        move = (cameraForward * vertical + cameraRight * horizontal).normalized * currentSpeed * Time.deltaTime;
+
         return move;
     }
 
