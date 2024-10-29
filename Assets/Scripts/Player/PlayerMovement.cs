@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Animations")]
     [SerializeField] private Animator animator;
-
     [SerializeField] private GameObject model;
 
     void Awake()
@@ -62,16 +61,9 @@ public class PlayerMovement : MonoBehaviour
             speed = 3.5f;
             Walking();
         }
-
-        
-
-
-
-
-        animator.SetFloat("Speed", currentSpeed);
         
         animator.SetBool("Grounded", isGrounded);
-
+        animator.SetFloat("Speed", currentSpeed);
 
 
 
@@ -85,8 +77,6 @@ public class PlayerMovement : MonoBehaviour
             //Code for action on mouse moving right
             // print("Mouse moved right");
         }
-
-
 
         if (Input.GetKeyDown("space") && isGrounded)
         {
@@ -104,8 +94,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Walking()
     {
-       
-
         // Apply movement
         if (move != Vector3.zero)
         {
@@ -116,10 +104,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Sprinting()
     {
-
-
-        
-
         // Apply movement
         if (move != Vector3.zero)
         {
@@ -132,6 +116,12 @@ public class PlayerMovement : MonoBehaviour
     {
         // Used for Animator, will hopefully implement special conditions for landing later
     }
+
+    void OnFootstep()
+    {
+        // Used for Animator
+    }
+
 
 
     Vector3 GetMove() 
@@ -156,7 +146,6 @@ public class PlayerMovement : MonoBehaviour
     // Temporary Dash function, to be removed upon completion of the smoother dash
     void isDashing()
     {
-     
         transform.position += GetMove().normalized * dashDistance;
     }
 }
