@@ -149,22 +149,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 cameraRight = Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)).normalized;
 
         // Calculate the movement direction based on input and camera's orientation
-<<<<<<< HEAD
         move = (cameraForward * vertical + cameraRight * horizontal).normalized * speed * Time.deltaTime;
         return move;
-=======
-        Vector3 move = (cameraForward * vertical + cameraRight * horizontal).normalized * speed * Time.deltaTime;
-
-        // Log to check the values of cameraForward, cameraRight, and move
-        // Debug.Log($"CameraForward: {cameraForward}, CameraRight: {cameraRight}, Move: {move}");
-
-        // Apply movement
-        if (move != Vector3.zero)
-        {
-            model.transform.forward = move.normalized;
-            transform.position += move;
-        }
->>>>>>> origin/master
     }
 
     // Temporary Dash function, to be removed upon completion of the smoother dash
