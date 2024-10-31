@@ -17,8 +17,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashDistance = 5.0f;
     [SerializeField] private bool isSprinting;
 
-
-
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] public float groundDistance = 0.5f;
