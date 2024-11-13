@@ -2102,8 +2102,8 @@ MonoBehaviour:
   playerCameraTransform: {fileID: 1464435556}
   pickupUI: {fileID: 16473649}
   pickupCollider: {fileID: 0}
-  width: 1
   currentPickables: []
+  itemPickupEvent: {fileID: 0}
 --- !u!1 &1761167635
 GameObject:
   m_ObjectHideFlags: 0
