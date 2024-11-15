@@ -33,7 +33,7 @@ public class GunIndicator : MonoBehaviour
         {
             BulletData value = (BulletData)data;
             SetBulletType(value.name);
-            SetBulletCount(value.bulletCount);
+//            SetBulletCount(value.count);
         }
     }
 

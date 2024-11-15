@@ -22,7 +22,7 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         // TEMP UNTIL SAVE SYSTEM IS IMPLEMENTED
-        bulletTypes.ForEach(bullet => bullet.bulletCount = 10);
+//        bulletTypes.ForEach(bullet => bullet.count = 10);
 
         selectedBullet = bulletTypes[selectedBulletIndex];
         onBulletSwitched.Raise(this, selectedBullet);
@@ -44,19 +44,19 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        if (selectedBullet.bulletCount > 0)
-        {
+//        if (selectedBullet.count > 0)
+//        {
             GameObject bullet = Instantiate(selectedBullet.model, gunTip.position, gunTip.rotation);
 
-            selectedBullet.bulletCount--;
-            onBulletCountChanged.Raise(this, selectedBullet.bulletCount);
+//            selectedBullet.count--;
+//            onBulletCountChanged.Raise(this, selectedBullet.count);
 
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.velocity = gunTip.forward * selectedBullet.bulletForce;
             }
-        }
+//        }
     }
 
     private void SwitchSelectedBullet(float direction)

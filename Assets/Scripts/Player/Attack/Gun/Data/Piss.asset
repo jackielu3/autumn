@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fc2a37a54bce74b95e0ea13f12d4c6, type: 3}
   m_Name: Piss
   m_EditorClassIdentifier: 
+  itemName: 
+  icon: {fileID: 0}
+  model: {fileID: 1797256952928289083, guid: de60adaf864cbc64d9b23dfeed67b118, type: 3}
+  description: 
   model: {fileID: 1797256952928289083, guid: de60adaf864cbc64d9b23dfeed67b118, type: 3}
   rigidbody: {fileID: -4753466074943962028, guid: c40ede8d9efc38e4db52b53cc617bd69, type: 3}
   animation: {fileID: 0}
   damage: 1
   bulletForce: 5
   reloadTime: 0.25
-  bulletCount: 2
+  count: 10
