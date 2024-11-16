@@ -7,6 +7,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
+    [Header("References")]
+    public DynamicInventory playerInventory;
+
+    private void Awake()
+    {
+        playerInventory.Initialize();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -14,7 +22,6 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
-
 
     private void GameOver()
     {

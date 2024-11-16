@@ -13,9 +13,10 @@ public class PlayerPickup : MonoBehaviour
     {
         if (collider.TryGetComponent(out InstanceItemContainer foundItem))
         {
-            inventory.AddItem(foundItem.TakeItem());
+            ItemInstance item = foundItem.TakeItem();
+            inventory.AddItem(item);
 
-            Debug.Log($"Item Collected: { foundItem.name }, Amout: { foundItem.item.count }");
+            Debug.Log($"Item Collected: { item.itemType.itemName }, Amout: { foundItem.item.count }");
         }
     }
 }

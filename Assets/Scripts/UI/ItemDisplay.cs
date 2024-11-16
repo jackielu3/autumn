@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/* WIP, NEED TO EDIT WITH NEW CATEGORY SYSTEM, SAME ISSUE AS INVENTORYDISPLAY.CS
 public class ItemDisplay : MonoBehaviour
 {
     public int itemIndex;
@@ -19,3 +19,4 @@ public class ItemDisplay : MonoBehaviour
         inventoryDisplay.DropItem(itemIndex);
     }
 }
+*/

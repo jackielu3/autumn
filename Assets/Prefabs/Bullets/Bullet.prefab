@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -4753466074943962028}
   - component: {fileID: -1947880576606198116}
   - component: {fileID: -2426536279282571942}
+  - component: {fileID: -989007644943927070}
   m_Layer: 6
   m_Name: Bullet
   m_TagString: Pickable
@@ -162,3 +163,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderers: []
   color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &-989007644943927070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797256952928289083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364fde6c06f37074893eed2f66f1dff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    itemType: {fileID: 11400000, guid: 127008bf9c060fc46b5e6f52301c734c, type: 2}
+    count: 0

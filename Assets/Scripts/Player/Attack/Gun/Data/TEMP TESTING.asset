@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30fc2a37a54bce74b95e0ea13f12d4c6, type: 3}
-  m_Name: Acorn
+  m_Script: {fileID: 11500000, guid: 7348fefaa214c434cafea6b5f93fca3a, type: 3}
+  m_Name: TEMP TESTING
   m_EditorClassIdentifier: 
   itemName: 
   icon: {fileID: 0}
-  model: {fileID: 1797256952928289083, guid: c40ede8d9efc38e4db52b53cc617bd69, type: 3}
+  model: {fileID: 0}
   description: 
-  startingCount: 10
-  damage: 25
-  bulletForce: 15
-  reloadTime: 1
+  startingCount: 0

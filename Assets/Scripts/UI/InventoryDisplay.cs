@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/* WIP, NEED TO EDIT WITH NEW CATEGORY SYSTEM, SAME ISSUE AS ITEMDISPLAY.CS
 public class InventoryDisplay : MonoBehaviour
 {
     public DynamicInventory inventory;
@@ -34,7 +34,7 @@ public class InventoryDisplay : MonoBehaviour
         // Creates a new object and gives it the item data
         GameObject droppedItem = new GameObject();
         droppedItem.AddComponent<Rigidbody>();
-        droppedItem.AddComponent<InstanceItemContainer>().item = inventory.items[itemIndex];
+        droppedItem.AddComponent<InstanceItemContainer>().item = inventory.categories[itemIndex];
         GameObject itemModel = Instantiate(inventory.items[itemIndex].itemType.model, droppedItem.transform);
 
         // Removes the item from the inventory
@@ -44,3 +44,4 @@ public class InventoryDisplay : MonoBehaviour
         UpdateInventory();
     }
 }
+*/
