@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu]
 public class DynamicInventory : ScriptableObject
 {
+    [Header("Events")]
+    public GameEvent onItemCountChanged;
+
     [Serializable]
     public class PredefinedItem
     {
@@ -73,6 +76,7 @@ public class DynamicInventory : ScriptableObject
         if (existingItem != null)
         {
             existingItem.count += amount;
+            ItemCountChanged(existingItem, amount);
         }
         else
         {
@@ -80,6 +84,7 @@ public class DynamicInventory : ScriptableObject
             {
                 item.count = amount;
                 category.items.Add(item);
+                ItemCountChanged(item, amount);
             }
             else
             {
@@ -95,6 +100,7 @@ public class DynamicInventory : ScriptableObject
         {
             category.items.Remove(item);
         }
+        ItemCountChanged(item, -1);
     }
 
     public ItemInstance FindItemInstance(ItemInstance item)
@@ -119,6 +125,17 @@ public class DynamicInventory : ScriptableObject
         return categories;
     }
 
+    private void ItemCountChanged(ItemInstance item, int changeAmount)
+    {
+        var eventData = new Dictionary<string, object>
+        {
+            { "itemType", item.itemType },
+            { "count", item.count },
+            { "changeAmount", changeAmount }
+        };
+
+        onItemCountChanged.Raise(null, eventData);
+    }
 }
 
 

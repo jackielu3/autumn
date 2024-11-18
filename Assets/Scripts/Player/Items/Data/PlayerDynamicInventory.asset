@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437206c54d917f24aab7423d23ad1005, type: 3}
   m_Name: PlayerDynamicInventory
   m_EditorClassIdentifier: 
+  onItemCountChanged: {fileID: 11400000, guid: 49692c8f309633a479b6c2fabff50605, type: 2}
   predefinedItems:
   - itemType: {fileID: 11400000, guid: 127008bf9c060fc46b5e6f52301c734c, type: 2}
     count: 10

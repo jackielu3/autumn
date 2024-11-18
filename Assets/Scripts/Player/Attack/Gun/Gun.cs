@@ -1,10 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Xml;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 using static DynamicInventory;
 using static Unity.VisualScripting.Member;
 
@@ -15,20 +10,21 @@ public class Gun : MonoBehaviour
     [SerializeField] private DynamicInventory playerInventory;
 
     [Header("Events")]
-    public GameEvent onBulletCountChanged;
-    public GameEvent onBulletSwitched;
+    public GameEvent onBulletDataChanged;
 
     [Header("Bullet Types")]
+    // Currently manually setting selected bullet in editor on startup, but I need to find a way to change that....... ehe
     [SerializeField] private BulletData selectedBullet;
-    [SerializeField] private int selectedBulletIndex;
+    [SerializeField] private int selectedBulletIndex = 0;
     [SerializeField] private List<ItemInstance> bulletInstances = new();
 
     private void Start()
     {
         UpdateBulletList();
+
         if (bulletInstances.Count > 0)
         {
-            SelectBullet(0);
+            SelectBullet(selectedBulletIndex);
         }
         else
         {
@@ -58,7 +54,6 @@ public class Gun : MonoBehaviour
             ItemInstance bulletInstance = bulletInstances[selectedBulletIndex];
             if (bulletInstance.count > 0)
             {
-                // Instantiate the bullet and update inventory count
                 GameObject bullet = Instantiate(selectedBullet.model, gunTip.position, gunTip.rotation);
 
                 Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -68,7 +63,7 @@ public class Gun : MonoBehaviour
                 }
 
                 bulletInstance.count--;
-                onBulletCountChanged.Raise(this, bulletInstance.count);
+                BulletDataChanged();
             }
             else
             {
@@ -87,7 +82,20 @@ public class Gun : MonoBehaviour
     {
         selectedBulletIndex = index;
         selectedBullet = bulletInstances[index].itemType as BulletData;
-        onBulletSwitched.Raise(this, selectedBullet);
+        BulletDataChanged();
+    }
+
+    private void BulletDataChanged()
+    {
+        var eventData = new Dictionary<string, object>
+        {
+            { "itemType", selectedBullet },
+            { "count", bulletInstances[selectedBulletIndex].count }
+        };
+
+        Debug.Log("UI Change Test: Item Type: " + eventData["itemType"] + ", Count: " + eventData["count"]);
+
+        onBulletDataChanged.Raise(this, eventData);
     }
 
     private void UpdateBulletList()
@@ -110,8 +118,26 @@ public class Gun : MonoBehaviour
             }
         }
 
+        BulletDataChanged();
         Debug.Log($"Updated bullet list with {bulletInstances.Count} items.");
+    }
 
+    public void UpdateBulletListEvent(Component sender, object data)
+    {
+        if (data is Dictionary<string, object> itemInfo)
+        {
+            if (itemInfo.TryGetValue("itemType", out object itemTypeObj) &&
+                itemInfo.TryGetValue("count", out object countObj) &&
+                itemInfo.TryGetValue("changeAmount", out object changeAmountObj))
+            {
+                // May be used for future things such as effects or something.... uwu!
+                // ItemData itemType = itemTypeObj as ItemData;
+                // int count = (int)countObj;
+                // int changeAmount = (int)changeAmountObj;
+
+                UpdateBulletList();
+            }
+        }
     }
 }
  

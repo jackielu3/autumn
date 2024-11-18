@@ -525,19 +525,7 @@ MonoBehaviour:
   gameEvent: {fileID: 11400000, guid: b16426244bc1f1c42a195761487ab206, type: 2}
   response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 292317175}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &292317175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1590,7 +1578,6 @@ GameObject:
   - component: {fileID: 1060842568}
   - component: {fileID: 1060842570}
   - component: {fileID: 1060842571}
-  - component: {fileID: 1060842572}
   m_Layer: 5
   m_Name: Bullet Text
   m_TagString: Untagged
@@ -1741,50 +1728,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51c1f9fec229c24bb5076124cba979d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: e8d7b74358fd2ed4bb97625d5a7a6f4b, type: 2}
+  gameEvent: {fileID: 11400000, guid: 73a91ea8deba27243932042fa313a4ff, type: 2}
   response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1060842570}
-        m_TargetAssemblyTypeName: GunIndicator, Assembly-CSharp
-        m_MethodName: UpdateBulletType
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1060842572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060842566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51c1f9fec229c24bb5076124cba979d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 42b8696c7c92943449e8987534a51e13, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1060842570}
-        m_TargetAssemblyTypeName: GunIndicator, Assembly-CSharp
-        m_MethodName: UpdateBulletCount
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1001 &1081897769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2376,6 +2323,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de60adaf864cbc64d9b23dfeed67b118, type: 3}
+--- !u!1 &1714329533 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5481839991888782281, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
+  m_PrefabInstance: {fileID: 3554408427661639326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714329535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9070902215083550067, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
+  m_PrefabInstance: {fileID: 3554408427661639326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714329533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5af1d147da6ef6469d9f13dfafb3e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1714329537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714329533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51c1f9fec229c24bb5076124cba979d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 49692c8f309633a479b6c2fabff50605, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1714329535}
+        m_TargetAssemblyTypeName: Gun, Assembly-CSharp
+        m_MethodName: UpdateBulletListEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1761167635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,6 +2897,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e8d7b74358fd2ed4bb97625d5a7a6f4b, type: 2}
     - target: {fileID: 9070902215083550067, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
+      propertyPath: onBulletDataChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 73a91ea8deba27243932042fa313a4ff, type: 2}
+    - target: {fileID: 9070902215083550067, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
       propertyPath: onBulletCountChanged
       value: 
       objectReference: {fileID: 11400000, guid: 42b8696c7c92943449e8987534a51e13, type: 2}
@@ -2925,7 +2920,10 @@ PrefabInstance:
     - {fileID: 1750313364849362732, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5481839991888782281, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1714329537}
   m_SourcePrefab: {fileID: 100100000, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

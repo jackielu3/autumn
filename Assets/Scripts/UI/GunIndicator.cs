@@ -27,22 +27,21 @@ public class GunIndicator : MonoBehaviour
         text.text = $"{bulletType} {bulletCount}";
     }
 
-    public void UpdateBulletType(Component sender, object data)
+    public void UpdateBulletUI(Component sender, object data)
     {
-        if (data is BulletData)
+        if (data is Dictionary<string, object> bulletData)
         {
-            BulletData value = (BulletData)data;
-            SetBulletType(value.name);
-//            SetBulletCount(value.count);
-        }
-    }
+            if (bulletData.TryGetValue("itemType", out object itemTypeObj) &&
+                bulletData.TryGetValue("count", out object countObj))
+            {
+                BulletData itemType = itemTypeObj as BulletData;
+                int count = (int)countObj;
 
-    public void UpdateBulletCount(Component sender, object data)
-    {
-        if (data is int)
-        {
-            int value = (int)data;
-            SetBulletCount(value);
+                SetBulletType(itemType.name);
+                SetBulletCount(count);
+
+                Debug.Log("Gun UI Set");
+            }
         }
     }
 }
