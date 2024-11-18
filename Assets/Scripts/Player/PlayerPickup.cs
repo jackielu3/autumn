@@ -7,7 +7,12 @@ using UnityEngine;
 
 public class PlayerPickup : MonoBehaviour
 {
-    public DynamicInventory inventory;
+    [Header("References")]
+    [SerializeField] private DynamicInventory inventory;
+
+    [Header("Trackers")]
+    private List<ItemInstance> inRangeItems;
+        
 
     private void OnTriggerEnter(Collider collider)
     {
