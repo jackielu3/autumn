@@ -21,6 +21,14 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        else if (Input.GetKeyDown(KeyCode.PageUp))
+        {
+
+        }
+        else if (Input.GetKeyDown(KeyCode.PageDown))
+        {
+            
+        }
     }
 
     private void GameOver()

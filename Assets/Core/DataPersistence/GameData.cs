@@ -1,11 +1,12 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 [Serializable]
 public class GameData
 {
-    public int maxHP;
-    public int currentHP;
+    public float maxHP;
+    public float currentHP;
 
     public GameData()
     {
