@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Unity.VisualScripting;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -35,6 +36,19 @@ public class DataPersistenceManager : MonoBehaviour
         LoadGame();
     }
 
+    // TODO REMOVE!!!
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            Debug.Log("uwu");
+            SaveGame();
+        }
+    }
+
+
+
+    // TODO TEMP!!
     public void OnApplicationQuit()
     {
         SaveGame();
@@ -87,7 +101,5 @@ public class DataPersistenceManager : MonoBehaviour
         {
             Debug.LogError($"Error writing save file: {e}");
         }
-
-        
     }
 }

@@ -13,8 +13,7 @@ public class PlayerDash : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        var targetAngle = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg;
-
+        var targetAngle = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg; 
 
         currentSpeed = new Vector3(horizontal, 0, vertical).magnitude * speed;
 

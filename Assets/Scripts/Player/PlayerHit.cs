@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHit : MonoBehaviour
+public class PlayerHit : MonoBehaviour, ISaveable
 {
     [Header("References")]
     public bool playerAlive;
@@ -16,23 +16,23 @@ public class PlayerHit : MonoBehaviour
 
 
     [Header("Health")]
-    [SerializeField] private float MaxHp;
-    [SerializeField] private float Hp;
+    [SerializeField] private float maxHP;
+    [SerializeField] private float currentHP;
 
 
     // Start is called before the first frame update
     void Start()
     {
         playerAlive = true;
-        SetMaxHealth(MaxHp);
-        SetHealth(Hp);
+        SetMaxHealth(maxHP);
+        SetHealth(currentHP);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Game Over HP 0
-        if (Hp <= 0 && playerAlive)
+        if (currentHP <= 0 && playerAlive)
         {
             PlayerDeath();
         }
@@ -44,7 +44,7 @@ public class PlayerHit : MonoBehaviour
         // Debug.Log(col.gameObject.tag);
         GameObject source = col.gameObject;
 
-        // Debug.Log(col);
+        Debug.Log(col);
 
         if (source.CompareTag("Enemy"))
         {
@@ -57,29 +57,29 @@ public class PlayerHit : MonoBehaviour
     // Calculates the damage
     private void Hit(float damage)
     {
-        if (Hp - damage > 0)
+        if (currentHP - damage > 0)
         {
-            Hp -= damage;
+            currentHP -= damage;
         }
         else
         {
-            Hp = 0;
+            currentHP = 0;
         }
 
-        SetHealth(Hp);
+        SetHealth(currentHP);
     }
 
     // Sets the HP of the player
     public void SetHealth(float health)
     {
-        Hp = health;
+        currentHP = health;
         onPlayerHealthChanged.Raise(this, health);
     }
 
     // Sets the Max HP of the player
     public void SetMaxHealth(float health)
     {
-        MaxHp = health;
+        maxHP = health;
         onPlayerMaxHealthChanged.Raise(this, health);
     }
 
@@ -88,5 +88,20 @@ public class PlayerHit : MonoBehaviour
     {
         playerAlive = false;
         onPlayerDeath.Raise(this, null);
+    }
+
+    public void LoadData(GameData data)
+    {
+        maxHP = data.maxHP;
+        currentHP = data.currentHP;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        Debug.Log($"Loaded Player HP: {currentHP}/{maxHP}");
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.maxHP = maxHP;
+        data.currentHP = currentHP;
+        Debug.Log($"Saved Player HP: {currentHP}/{maxHP}");
     }
 }
