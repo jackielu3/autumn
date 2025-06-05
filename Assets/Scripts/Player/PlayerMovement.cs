@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            isDashing();
+            IsDashing();
         }
         else
         {
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             // print("Mouse moved right");
         }
 
-        if (Input.GetKeyDown("space") && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rigidBody.velocity = Vector3.up * jumpForce;
             animator.SetBool("Jump", true);
@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Temporary Dash function, to be removed upon completion of the smoother dash
-    void isDashing()
+    void IsDashing()
     {
         transform.position += GetMove().normalized * dashDistance;
     }

@@ -12,7 +12,7 @@ public class PlayerPickup : MonoBehaviour
     [SerializeField] private DynamicInventory inventory;
 
     [Header("Trackers")]
-    private List<InstanceItemContainer> inRangeItems = new();
+    private readonly List<InstanceItemContainer> inRangeItems = new();
 
     private void Update()
     {

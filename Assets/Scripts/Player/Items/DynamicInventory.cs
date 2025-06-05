@@ -96,10 +96,7 @@ public class DynamicInventory : ScriptableObject
     public void RemoveItem(ItemInstance item)
     {
         var category = GetCategory(item.itemType.GetType());
-        if (category != null)
-        {
-            category.items.Remove(item);
-        }
+        category?.items.Remove(item);
         ItemCountChanged(item, -1);
     }
 
@@ -137,62 +134,3 @@ public class DynamicInventory : ScriptableObject
         onItemCountChanged.Raise(null, eventData);
     }
 }
-
-
-
-
-
-/*
-[CreateAssetMenu]
-public class DynamicInventory : ScriptableObject
-{
-    // HAVE DIFFERENT INVENTORY MAXS FOR DIFFERNET ITEM TYPES, IE. BULLETS, COLLECTABLES, POO, ETC
-
-    [Header("Inventory Types")]
-    public int maxBullets = 10;
-
-    public List<ItemInstance> bullets = new();
-
-
-    public void AddItem(ItemInstance item, int amount = 1)
-    {
-        if (item.itemType is BulletData)
-        {
-            AddToCategory(item, bullets, maxBullets, amount);
-        }
-    }
-
-    private void AddToCategory(ItemInstance item, List<ItemInstance> category, int maxSize, int amount = 1)
-    {
-        ItemInstance existingItem = category.Find(existing => existing.itemType == item.itemType);
-
-        if (existingItem != null)
-        {
-            existingItem.count += amount;
-        }
-        else
-        {
-            if (category.Count < maxSize)
-            {
-                item.count = amount;
-                category.Add(item);
-            }
-            else
-            {
-                Debug.LogWarning($"No space left in category for {item.itemType.itemName}");
-            }
-        }
-    }
-    private ItemInstance FindItemInstance(ItemInstance item)
-    {
-        if (item.itemType is BulletData)
-        {
-            return bullets.Find(existing => existing.itemType == item.itemType);
-        }
-        else
-        {
-            return null;
-        }
-    }
-}
-*/
