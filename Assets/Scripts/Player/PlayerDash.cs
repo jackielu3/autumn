@@ -8,23 +8,6 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private GameObject model;
     [SerializeField][ReadOnly] private float currentSpeed;
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    
-    
-    void Update()
-    {
-        
-    }
-
-
     void Sprinting()
     {
         float horizontal = Input.GetAxis("Horizontal");

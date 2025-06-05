@@ -46,7 +46,7 @@ public class PlayerHit : MonoBehaviour
 
         // Debug.Log(col);
 
-        if (source.tag == "Enemy")
+        if (source.CompareTag("Enemy"))
         {
             float damageTaken = source.GetComponent<EnemyAttack>().getBodyDamage();
             Hit(damageTaken);
