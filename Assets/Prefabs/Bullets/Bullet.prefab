@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -989007644943927070}
   m_Layer: 6
   m_Name: Bullet
-  m_TagString: Pickable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletData: {fileID: 11400000, guid: 127008bf9c060fc46b5e6f52301c734c, type: 2}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &-2426536279282571942
 MonoBehaviour:
   m_ObjectHideFlags: 0

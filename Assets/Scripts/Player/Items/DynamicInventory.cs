@@ -28,7 +28,7 @@ public class DynamicInventory : ScriptableObject
 
     [SerializeField] private Dictionary<Type, Category> categories = new();
 
-    // These are for the devs (us!!!) to be able to see what is happening in the inventory uwu
+    // These are for the devs (us!!!) to be able to see what is happening in the inventory
     [Header("Debug: Current Inventory")]
     [TextArea(5, 10)]
     public string inventoryDebugInfo;

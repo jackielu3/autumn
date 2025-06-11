@@ -21,7 +21,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float groundDistance = 0.5f;
+
+    [Header("Ground Check")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
     [SerializeField][ReadOnly] private bool isGrounded;
 
 
@@ -41,6 +45,14 @@ public class PlayerMovement : MonoBehaviour
     // Frame-rate independent update
     private void FixedUpdate()
     {
+        // Grounded check
+        isGrounded = Physics.CheckSphere(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer,
+            QueryTriggerInteraction.Ignore
+        );
+
         HandleMovement();
     }
 
@@ -54,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 cameraRight = Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)).normalized;
 
         moveInput = (cameraForward * vertical + cameraRight * horizontal).normalized;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundDistance);
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -100,10 +111,16 @@ public class PlayerMovement : MonoBehaviour
         rigidBody.velocity = horizontalVelocity;
 
         // Rotate model toward movement
-        if (moveInput != Vector3.zero)
+        if (moveInput.sqrMagnitude > 0.001f)
         {
             model.transform.forward = moveInput;
         }
+        // Zero out movement velocity
+        if (moveVelocity.sqrMagnitude < 0.0001f)
+        {
+            moveVelocity = Vector3.zero;
+        }
+
     }
 
     // State updates for the animator
@@ -117,6 +134,16 @@ public class PlayerMovement : MonoBehaviour
     // TODO Implement!!
     private void OnLand() { }
     private void OnFootstep() { }
+
+    // Debug
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+    }
 
 }
 

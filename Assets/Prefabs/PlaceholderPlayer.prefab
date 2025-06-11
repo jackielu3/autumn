@@ -623,7 +623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5887764597092969214}
   - component: {fileID: 3152300116598695110}
-  - component: {fileID: 6797174499714196511}
+  - component: {fileID: 191769184691986207}
   m_Layer: 0
   m_Name: RobotKile
   m_TagString: Untagged
@@ -750,14 +750,14 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.055547297, y: -0.0010921359, z: -0.024414107}
     m_Extent: {x: 0.9450676, y: 0.59965783, z: 0.19336726}
   m_DirtyAABB: 0
---- !u!65 &6797174499714196511
-BoxCollider:
+--- !u!136 &191769184691986207
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2858596856806694807}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 914ddd0634b5b4e4ea15d0ef352d0514, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -768,9 +768,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.199316, y: 1.8901355, z: 0.38673452}
-  m_Center: {x: 0.00006040174, y: 0.86773217, z: 0.006730458}
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.00006040174, y: 1, z: 0.006730458}
 --- !u!1 &2886410019170292810
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +988,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 40db3173a05ae3242b1c182a09b0a183, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1034,17 +1036,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 8304789542527811690}
+  animator: {fileID: 5931487907677383599}
+  model: {fileID: 1828936538522667113}
+  walkSpeed: 3.5
+  sprintSpeed: 6
+  dashForce: 200
   currentSpeed: 0
-  move: {x: 0, y: 0, z: 0}
   moveInput: {x: 0, y: 0, z: 0}
-  isGrounded: 0
-  speed: 5
-  dashDistance: 5
+  moveVelocity: {x: 0, y: 0, z: 0}
   isSprinting: 0
   jumpForce: 5
   groundDistance: 0.5
-  animator: {fileID: 5931487907677383599}
-  model: {fileID: 1828936538522667113}
+  isGrounded: 0
 --- !u!114 &8210047758715179063
 MonoBehaviour:
   m_ObjectHideFlags: 0

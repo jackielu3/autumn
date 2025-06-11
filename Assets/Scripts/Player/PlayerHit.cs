@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerHit : MonoBehaviour, ISaveable
 {
+
     [Header("References")]
     public bool playerAlive;
+    [SerializeField] private LayerMask enemyLayerMask;
+
 
     [Header("Events")]
     public GameEvent onPlayerHealthChanged;
@@ -36,21 +39,22 @@ public class PlayerHit : MonoBehaviour, ISaveable
         {
             PlayerDeath();
         }
-
     }
 
     void OnCollisionEnter(Collision col)
     {
-        // Debug.Log(col.gameObject.tag);
-        GameObject source = col.gameObject;
+       // skip if no layer
+        if (((1 << col.gameObject.layer) & enemyLayerMask) == 0)
+            return;
 
-        Debug.Log(col);
-
-        if (source.CompareTag("Enemy"))
+        if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            float damageTaken = source.GetComponent<EnemyAttack>().getBodyDamage();
+            if (!col.gameObject.TryGetComponent<EnemyAttack>(out var attack))
+                return;
+
+            float damageTaken = attack.getBodyDamage();
             Hit(damageTaken);
-            onPlayerTakesDamage.Raise(source.GetComponent<EnemyAttack>(), damageTaken);
+            onPlayerTakesDamage.Raise(attack, damageTaken);
         }
     }
 
