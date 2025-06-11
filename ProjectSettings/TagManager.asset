@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - PlayerAttack
-  - Ground and Wall
-  - Pickable
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -15,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
+  - Enemy
+  - Ground
+  - Wall
   - Pickable
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerAttack
   - 
   - 
   - 

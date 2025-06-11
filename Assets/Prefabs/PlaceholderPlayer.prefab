@@ -623,7 +623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5887764597092969214}
   - component: {fileID: 3152300116598695110}
-  - component: {fileID: 6797174499714196511}
+  - component: {fileID: 191769184691986207}
   m_Layer: 0
   m_Name: RobotKile
   m_TagString: Untagged
@@ -750,14 +750,14 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.055547297, y: -0.0010921359, z: -0.024414107}
     m_Extent: {x: 0.9450676, y: 0.59965783, z: 0.19336726}
   m_DirtyAABB: 0
---- !u!65 &6797174499714196511
-BoxCollider:
+--- !u!136 &191769184691986207
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2858596856806694807}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 914ddd0634b5b4e4ea15d0ef352d0514, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -768,9 +768,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.199316, y: 1.8901355, z: 0.38673452}
-  m_Center: {x: 0.00006040174, y: 0.86773217, z: 0.006730458}
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.00006040174, y: 1, z: 0.006730458}
 --- !u!1 &2886410019170292810
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +988,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 40db3173a05ae3242b1c182a09b0a183, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1018,9 +1020,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &5601631134355605533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,16 +1036,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 8304789542527811690}
+  animator: {fileID: 5931487907677383599}
+  model: {fileID: 1828936538522667113}
+  walkSpeed: 3.5
+  sprintSpeed: 6
+  dashForce: 200
   currentSpeed: 0
-  move: {x: 0, y: 0, z: 0}
-  isGrounded: 0
-  speed: 5
-  dashDistance: 5
+  moveInput: {x: 0, y: 0, z: 0}
+  moveVelocity: {x: 0, y: 0, z: 0}
   isSprinting: 0
   jumpForce: 5
   groundDistance: 0.5
-  animator: {fileID: 5931487907677383599}
-  model: {fileID: 1828936538522667113}
+  isGrounded: 0
 --- !u!114 &8210047758715179063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,8 +1065,8 @@ MonoBehaviour:
   onPlayerMaxHealthChanged: {fileID: 11400000, guid: 5b80cd717ac52464fb11834e90d02697, type: 2}
   onPlayerDeath: {fileID: 11400000, guid: b16426244bc1f1c42a195761487ab206, type: 2}
   onPlayerTakesDamage: {fileID: 11400000, guid: 106954e160af71c46918a6eafe7f1bba, type: 2}
-  MaxHp: 100
-  Hp: 100
+  maxHP: 0
+  currentHP: 0
 --- !u!114 &4417412531489186526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1288,7 @@ GameObject:
   - component: {fileID: 6100466062617851363}
   - component: {fileID: 2679355750122915164}
   - component: {fileID: 9070902215083550067}
+  - component: {fileID: 7887885521523772004}
   m_Layer: 0
   m_Name: flaregun
   m_TagString: Untagged
@@ -1343,11 +1348,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunTip: {fileID: 5735398710262967872}
-  onBulletCountChanged: {fileID: 0}
-  onBulletSwitched: {fileID: 0}
-  bulletTypes: []
-  selectedBullet: {fileID: 0}
+  playerInventory: {fileID: 11400000, guid: cf7bd0c5f65d61e42884adedf33b178a, type: 2}
+  onBulletDataChanged: {fileID: 11400000, guid: 73a91ea8deba27243932042fa313a4ff, type: 2}
+  selectedBullet: {fileID: 11400000, guid: 127008bf9c060fc46b5e6f52301c734c, type: 2}
   selectedBulletIndex: 0
+  bulletInstances: []
+--- !u!114 &7887885521523772004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481839991888782281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51c1f9fec229c24bb5076124cba979d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 49692c8f309633a479b6c2fabff50605, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9070902215083550067}
+        m_TargetAssemblyTypeName: Gun, Assembly-CSharp
+        m_MethodName: UpdateBulletListEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5629196928403501596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,7 +2143,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1436397971512699550}
-  - component: {fileID: 1750313364849362732}
   - component: {fileID: 583162189186182237}
   - component: {fileID: 3231308553555772266}
   m_Layer: 0
@@ -2135,27 +2167,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1470184523820064980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1750313364849362732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8086637703229329719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0774f9836d029b24a9133aff2d185f88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickableLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  playerCameraTransform: {fileID: 0}
-  pickupUI: {fileID: 0}
-  pickupCollider: {fileID: 0}
-  range: 3
-  width: 1
-  currentPickables: []
 --- !u!65 &583162189186182237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2189,15 +2200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0774f9836d029b24a9133aff2d185f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickableLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  playerCameraTransform: {fileID: 0}
-  pickupUI: {fileID: 0}
-  pickupCollider: {fileID: 583162189186182237}
-  range: 3
-  width: 1
-  currentPickables: []
+  inventory: {fileID: 11400000, guid: cf7bd0c5f65d61e42884adedf33b178a, type: 2}
 --- !u!1 &8135257238769201561
 GameObject:
   m_ObjectHideFlags: 0
