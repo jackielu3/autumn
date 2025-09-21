@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEditor;
 using Unity.VisualScripting;
 
@@ -26,14 +27,28 @@ public class DataPersistenceManager : MonoBehaviour
         filePath = Path.Combine(Application.persistentDataPath, "savefile.json");
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        // Find every MonoBehaviour in the scene that implements ISaveable (even if disabled).
-        saveableObjects = FindObjectsOfType<MonoBehaviour>(true)
-            .OfType<ISaveable>()
-            .ToList();
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
+    }
+
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Refresh list of saveable objects in the new scene
+        FindSaveableObjects();
 
         LoadGame();
+    }
+
+    private void Start()
+    {
+        FindSaveableObjects();
     }
 
     // TODO REMOVE!!!
@@ -58,6 +73,7 @@ public class DataPersistenceManager : MonoBehaviour
     {
         if (!File.Exists(filePath))
         {
+            Debug.Log(filePath);
             // No save file yet, use default values
             Debug.Log("No save file found. Creating new GameData with defaults.");
             gameData = new GameData();
@@ -101,5 +117,13 @@ public class DataPersistenceManager : MonoBehaviour
         {
             Debug.LogError($"Error writing save file: {e}");
         }
+    }
+
+    // Find every MonoBehaviour in the scene that implements ISaveable (even if disabled).
+    public void FindSaveableObjects()
+    {
+        saveableObjects = FindObjectsOfType<MonoBehaviour>(true)
+            .OfType<ISaveable>()
+            .ToList();
     }
 }

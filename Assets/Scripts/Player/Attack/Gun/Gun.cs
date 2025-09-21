@@ -93,7 +93,7 @@ public class Gun : MonoBehaviour
             { "count", bulletInstances[selectedBulletIndex].count }
         };
 
-        Debug.Log("UI Change Test: Item Type: " + eventData["itemType"] + ", Count: " + eventData["count"]);
+        // Debug.Log("UI Change Test: Item Type: " + eventData["itemType"] + ", Count: " + eventData["count"]);
 
         onBulletDataChanged.Raise(this, eventData);
     }

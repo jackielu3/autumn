@@ -39,8 +39,6 @@ public class GunIndicator : MonoBehaviour
 
                 SetBulletType(itemType.name);
                 SetBulletCount(count);
-
-                Debug.Log("Gun UI Set");
             }
         }
     }

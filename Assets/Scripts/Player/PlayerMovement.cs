@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject model;
+    [SerializeField] private CapsuleCollider col;
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 3.5f;
@@ -27,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField][ReadOnly] private bool isGrounded;
+
+    [Header("Physics Materials")]
+    [SerializeField] private PhysicMaterial frictionless;
+    [SerializeField] private PhysicMaterial stickyFeet;
 
 
     private void Awake()
@@ -52,6 +57,10 @@ public class PlayerMovement : MonoBehaviour
             groundLayer,
             QueryTriggerInteraction.Ignore
         );
+
+        // Switch Physics Matrial depending on if the user is moving and grounded
+        col.sharedMaterial = (isGrounded && moveInput == Vector3.zero) ? stickyFeet : frictionless;
+        col.enabled = false; col.enabled = true;
 
         HandleMovement();
     }
