@@ -530,6 +530,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &424045874 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 191769184691986207, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
+  m_PrefabInstance: {fileID: 3554408427661639326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &559243496
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,6 +3068,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5601631134355605533, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
+      propertyPath: col
+      value: 
+      objectReference: {fileID: 424045874}
+    - target: {fileID: 5601631134355605533, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
       propertyPath: dashForce
       value: 200
       objectReference: {fileID: 0}
@@ -3071,9 +3080,17 @@ PrefabInstance:
       value: 5.07
       objectReference: {fileID: 0}
     - target: {fileID: 5601631134355605533, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
+      propertyPath: stickyFeet
+      value: 
+      objectReference: {fileID: 13400000, guid: 07c1a409e8a12034aa46d8890e9fad3d, type: 2}
+    - target: {fileID: 5601631134355605533, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 1116473124}
+    - target: {fileID: 5601631134355605533, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
+      propertyPath: frictionless
+      value: 
+      objectReference: {fileID: 13400000, guid: adb1da6ce550d8c4abcf7627ede04854, type: 2}
     - target: {fileID: 5601631134355605533, guid: 72b98add4fd150b498dea8d728f14cd7, type: 3}
       propertyPath: groundDistance
       value: 0.05
