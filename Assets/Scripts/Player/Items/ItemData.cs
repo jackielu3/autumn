@@ -8,6 +8,7 @@ public class ItemData : ScriptableObject
     public string itemName;
     public Sprite icon;
     public GameObject model;
+    public Sprite sprite;
     [TextArea] public string description;
 
     // temp(?) used in ItemInstance.cs

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 [CreateAssetMenu]
 public class DynamicInventory : ScriptableObject
