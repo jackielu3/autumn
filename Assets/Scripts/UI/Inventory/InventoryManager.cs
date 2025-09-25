@@ -35,4 +35,64 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
+    public void OnInventoryItemBegan(Component sender, object data)
+    {
+        if (data is DynamicInventory.InventoryEventData evt)
+        {
+            // If already present, just update quantity
+            int index = FindSlotIndexByItem(evt.itemType);
+            if (index >= 0)
+            {
+                itemSlot[index].UpdateQuantity(evt.count);
+                return;
+            }
+
+            // Otherwise place into first empty slot
+            for (int i = 0; i < itemSlot.Length; i++)
+            {
+                if (!itemSlot[i].isFull)
+                {
+                    AddItem(new ItemInstance(evt.itemType) { count = evt.count });
+                    return;
+                }
+            }
+        }
+    }
+
+    public void OnInventoryItemCountChanged(Component sender, object data)
+    {
+        if (data is DynamicInventory.InventoryEventData evt)
+        {
+            int index = FindSlotIndexByItem(evt.itemType);
+            if (index >= 0)
+            {
+                itemSlot[index].UpdateQuantity(evt.count);
+            }
+        }
+    }
+
+    public void OnInventoryItemEnded(Component sender, object data)
+    {
+        if (data is DynamicInventory.InventoryEventData evt)
+        {
+            int index = FindSlotIndexByItem(evt.itemType);
+            if (index >= 0)
+            {
+                itemSlot[index].ClearItem();
+            }
+        }
+    }
+
+    private int FindSlotIndexByItem(ItemData item)
+    {
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].isFull && itemSlot[i].itemData == item)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

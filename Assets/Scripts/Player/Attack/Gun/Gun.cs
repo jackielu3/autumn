@@ -49,10 +49,10 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        if (selectedBullet != null)
+        if (selectedBullet != null && bulletInstances.Count > 0)
         {
-            ItemInstance bulletInstance = bulletInstances[selectedBulletIndex];
-            if (bulletInstance.count > 0)
+            // Try to consume one bullet from the inventory
+            if (playerInventory.TryConsume(selectedBullet, 1))
             {
                 GameObject bullet = Instantiate(selectedBullet.model, gunTip.position, gunTip.rotation);
 
@@ -62,7 +62,7 @@ public class Gun : MonoBehaviour
                     rb.velocity = gunTip.forward * selectedBullet.bulletForce;
                 }
 
-                bulletInstance.count--;
+                // Notify UI of current selected bullet and count
                 BulletDataChanged();
             }
             else
@@ -87,13 +87,13 @@ public class Gun : MonoBehaviour
 
     private void BulletDataChanged()
     {
-        var eventData = new Dictionary<string, object>
-        {
-            { "itemType", selectedBullet },
-            { "count", bulletInstances[selectedBulletIndex].count }
-        };
+        var eventData = new DynamicInventory.InventoryEventData(
+            selectedBullet,
+            bulletInstances.Count > 0 ? bulletInstances[selectedBulletIndex].count : 0,
+            0
+        );
 
-        // Debug.Log("UI Change Test: Item Type: " + eventData["itemType"] + ", Count: " + eventData["count"]);
+        // Debug.Log("UI Change Test: Item Type: " + selectedBullet + ", Count: " + eventData.count);
 
         onBulletDataChanged.Raise(this, eventData);
     }
@@ -124,17 +124,10 @@ public class Gun : MonoBehaviour
 
     public void UpdateBulletListEvent(Component sender, object data)
     {
-        if (data is Dictionary<string, object> itemInfo)
+        if (data is DynamicInventory.InventoryEventData eventData)
         {
-            if (itemInfo.TryGetValue("itemType", out object itemTypeObj) &&
-                itemInfo.TryGetValue("count", out object countObj) &&
-                itemInfo.TryGetValue("changeAmount", out object changeAmountObj))
+            if (eventData.itemType is BulletData)
             {
-                // May be used for future things such as effects or something.... uwu!
-                // ItemData itemType = itemTypeObj as ItemData;
-                // int count = (int)countObj;
-                // int changeAmount = (int)changeAmountObj;
-
                 UpdateBulletList();
             }
         }

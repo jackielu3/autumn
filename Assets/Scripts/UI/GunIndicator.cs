@@ -29,16 +29,13 @@ public class GunIndicator : MonoBehaviour
 
     public void UpdateBulletUI(Component sender, object data)
     {
-        if (data is Dictionary<string, object> bulletData)
+        if (data is DynamicInventory.InventoryEventData eventData)
         {
-            if (bulletData.TryGetValue("itemType", out object itemTypeObj) &&
-                bulletData.TryGetValue("count", out object countObj))
+            // Only react to bullet items
+            if (eventData.itemType is BulletData bulletData)
             {
-                BulletData itemType = itemTypeObj as BulletData;
-                int count = (int)countObj;
-
-                SetBulletType(itemType.name);
-                SetBulletCount(count);
+                SetBulletType(bulletData.name);
+                SetBulletCount(eventData.count);
             }
         }
     }

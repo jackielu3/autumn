@@ -1,19 +1,35 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [CreateAssetMenu]
 public class DynamicInventory : ScriptableObject
 {
     [Header("Events")]
+    public GameEvent onItemBegan;
     public GameEvent onItemCountChanged;
+    public GameEvent onItemEnded;
 
     [Serializable]
     public class PredefinedItem
     {
         public ItemData itemType;
         public int count;
+    }
+
+    [Serializable]
+    public class InventoryEventData
+    {
+        public ItemData itemType;
+        public int count;         // resulting count after the change
+        public int changeAmount;  // delta applied (positive for add, negative for remove)
+
+        public InventoryEventData(ItemData itemType, int count, int changeAmount)
+        {
+            this.itemType = itemType;
+            this.count = count;
+            this.changeAmount = changeAmount;
+        }
     }
 
     // Eventually will (hopefully) be used to track save data and used to store items
@@ -29,7 +45,7 @@ public class DynamicInventory : ScriptableObject
 
     [SerializeField] private Dictionary<Type, Category> categories = new();
 
-    // These are for the devs (us!!!) to be able to see what is happening in the inventory
+    // used for debugging
     [Header("Debug: Current Inventory")]
     [TextArea(5, 10)]
     public string inventoryDebugInfo;
@@ -85,6 +101,7 @@ public class DynamicInventory : ScriptableObject
             {
                 item.count = amount;
                 category.items.Add(item);
+                ItemBegan(item, amount);
                 ItemCountChanged(item, amount);
             }
             else
@@ -94,11 +111,42 @@ public class DynamicInventory : ScriptableObject
         }
     }
 
+    // TODO TEST IF USED!
     public void RemoveItem(ItemInstance item)
     {
         var category = GetCategory(item.itemType.GetType());
-        category?.items.Remove(item);
-        ItemCountChanged(item, -1);
+        if (category == null) return;
+
+        // Remove entire item entry and raise End event
+        if (category.items.Remove(item))
+        {
+            ItemEnded(item, -item.count);
+        }
+    }
+
+    // Consume a specific amount of an item type. Returns true if successful.
+    public bool TryConsume(ItemData itemType, int amount)
+    {
+        if (amount <= 0) return true;
+
+        var category = GetCategory(itemType.GetType());
+        if (category == null) return false;
+
+        var existingItem = category.items.Find(existing => existing.itemType == itemType);
+        if (existingItem == null) return false;
+        if (existingItem.count < amount) return false;
+
+        existingItem.count -= amount;
+        ItemCountChanged(existingItem, -amount);
+
+        if (existingItem.count <= 0)
+        {
+            // Remove the entry and raise End event
+            category.items.Remove(existingItem);
+            ItemEnded(existingItem, -amount);
+        }
+
+        return true;
     }
 
     public ItemInstance FindItemInstance(ItemInstance item)
@@ -125,13 +173,19 @@ public class DynamicInventory : ScriptableObject
 
     private void ItemCountChanged(ItemInstance item, int changeAmount)
     {
-        var eventData = new Dictionary<string, object>
-        {
-            { "itemType", item.itemType },
-            { "count", item.count },
-            { "changeAmount", changeAmount }
-        };
-
+        var eventData = new InventoryEventData(item.itemType, item.count, changeAmount);
         onItemCountChanged.Raise(null, eventData);
+    }
+
+    private void ItemBegan(ItemInstance item, int changeAmount)
+    {
+        var eventData = new InventoryEventData(item.itemType, item.count, changeAmount);
+        onItemBegan?.Raise(null, eventData);
+    }
+
+    private void ItemEnded(ItemInstance item, int changeAmount)
+    {
+        var eventData = new InventoryEventData(item.itemType, 0, changeAmount);
+        onItemEnded?.Raise(null, eventData);
     }
 }

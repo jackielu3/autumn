@@ -4,14 +4,18 @@ using UnityEngine;
 [CustomEditor(typeof(DynamicInventory))]
 public class DynamicInventoryEditor : Editor
 {
+    private SerializedProperty onItemBeganProperty;
     private SerializedProperty onItemCountChangedProperty;
+    private SerializedProperty onItemEndedProperty;
     private SerializedProperty predefinedItemsProperty;
     private DynamicInventory inventory;
 
 
     private void OnEnable()
     {
+        onItemBeganProperty = serializedObject.FindProperty("onItemBegan");
         onItemCountChangedProperty = serializedObject.FindProperty("onItemCountChanged");
+        onItemEndedProperty = serializedObject.FindProperty("onItemEnded");
         predefinedItemsProperty = serializedObject.FindProperty("predefinedItems");
         inventory = (DynamicInventory)target;
     }
@@ -20,7 +24,12 @@ public class DynamicInventoryEditor : Editor
     {
         serializedObject.Update();
 
+        EditorGUILayout.LabelField("Events", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(onItemBeganProperty, new GUIContent("Item Began Event"));
         EditorGUILayout.PropertyField(onItemCountChangedProperty, new GUIContent("Item Count Changed Event"));
+        EditorGUILayout.PropertyField(onItemEndedProperty, new GUIContent("Item Ended Event"));
+
+        EditorGUILayout.Space();
         EditorGUILayout.LabelField("Predefined Items (Initialization)", EditorStyles.boldLabel);
 
         // Predefined Items Section
