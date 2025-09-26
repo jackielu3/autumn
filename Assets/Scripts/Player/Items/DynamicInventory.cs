@@ -180,12 +180,12 @@ public class DynamicInventory : ScriptableObject
     private void ItemBegan(ItemInstance item, int changeAmount)
     {
         var eventData = new InventoryEventData(item.itemType, item.count, changeAmount);
-        onItemBegan?.Raise(null, eventData);
+        onItemBegan.Raise(null, eventData);
     }
 
     private void ItemEnded(ItemInstance item, int changeAmount)
     {
         var eventData = new InventoryEventData(item.itemType, 0, changeAmount);
-        onItemEnded?.Raise(null, eventData);
+        onItemEnded.Raise(null, eventData);
     }
 }

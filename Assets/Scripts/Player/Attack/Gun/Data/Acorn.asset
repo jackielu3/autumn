@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fc2a37a54bce74b95e0ea13f12d4c6, type: 3}
   m_Name: Acorn
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
+  itemName: Acorn
+  icon: {fileID: 21300000, guid: f1370a35d09d3bb49be8afd201f207fc, type: 3}
   model: {fileID: 1797256952928289083, guid: c40ede8d9efc38e4db52b53cc617bd69, type: 3}
-  description: 
+  sprite: {fileID: 21300000, guid: f1370a35d09d3bb49be8afd201f207fc, type: 3}
+  description: Hello world!
   startingCount: 10
   damage: 25
   bulletForce: 15

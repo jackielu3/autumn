@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     [Header("Item Data")]
     public string itemName;
@@ -16,6 +17,9 @@ public class ItemSlot : MonoBehaviour
     [Header("Item Slot")]
     [SerializeField] private TMP_Text quantityText;
     [SerializeField] private Image itemImage;
+
+    public GameObject selectedShader;
+    public bool isItemSelected;
 
     public void AddItem(ItemInstance item)
     {
@@ -65,4 +69,18 @@ public class ItemSlot : MonoBehaviour
         }
         isFull = false;
     }
+
+    public void OnPointerClick(PointerEventData data)
+    {
+        if (data.button == PointerEventData.InputButton.Left)
+        {
+            OnClick();   
+        }
+    }
+
+    private void OnClick()
+    {
+        selectedShader.SetActive(true);
+        isItemSelected = true;
+    }   
 }
